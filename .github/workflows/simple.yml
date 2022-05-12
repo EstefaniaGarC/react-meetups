@@ -1,0 +1,18 @@
+#name of the workflow
+name: Shell Commands
+#event
+on: [push]
+#jobs
+jobs:
+#name of the job 
+  run-shell-command: 
+    runs-on: ubuntu-latest
+#steps of the job
+    steps:
+      - name: echo a string
+        run: echo "Hello World!"
+#step that run multiple lines. To do so we use the pipe symbol "|"
+      - name: multiline script
+        run:  |
+          node -v
+          npm -v
