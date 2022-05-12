@@ -4,7 +4,7 @@ name: Shell Commands
 on: [push]
 #jobs
 jobs:
-#name of the job 
+#name of the job 1
   run-shell-command: 
     runs-on: ubuntu-latest
 #steps of the job
@@ -16,3 +16,15 @@ jobs:
         run:  |
           node -v
           npm -v
+#name of the job 2
+  run-windows-commands: 
+    runs-on: windows-latest
+#jobs dependency (the job will be executed after the ones indicated here)
+    needs: ["run-shell-command"]
+#steps of the job
+    steps:
+      - name: show directory with powershell
+        run: Get-Location
+      - name: show directory with bash
+        run:  pwd
+        shell: bash
