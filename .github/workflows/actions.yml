@@ -1,0 +1,20 @@
+name: Actions workflow
+
+on: [push]
+
+jobs:
+  run-github-actions:
+    runs-on: ubuntu-latest
+    steps:
+# the checkout action will authenticate with your repository, checkout into the commit that triggered this workflow to run 
+# and pull the code from that commit into the directory of the virtual machine 
+      - name: List files before checkout
+        run: |
+          pwd
+          ls -a      
+      - name: Checkout Action
+        uses: actions/checkout@v1
+      - name: List files after checkout
+        run: |
+          pwd
+          ls -a
