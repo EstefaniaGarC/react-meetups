@@ -1,11 +1,20 @@
 name: Actions workflow
 
-on: [push]
+on: 
+# repository dispatch allows to run this workflow externally, for instance, from a request sent from postman.
+#   repository_dispatch:
+#     types: [build]
+  # schedule:
+  #   - cron: "0/5 * * * *"
+  push:
 
 jobs:
   run-github-actions:
     runs-on: ubuntu-latest
     steps:
+# this step should print the variable 'env' sent in the payload of the 'repository_dispatch' event
+      - name: repository dispatch payload
+        run: echo ${{ github.event.client_payload.env }}
 # the checkout action will authenticate with your repository, checkout into the commit that triggered this workflow to run 
 # and pull the code from that commit into the directory of the virtual machine 
       - name: List files before checkout
@@ -18,3 +27,15 @@ jobs:
         run: |
           pwd
           ls -a
+# 
+# 
+# 
+# 
+# 
+# json object to run the workflow using the repository_dispatch:
+# {
+#   "client_type": "build",
+#   "client_payload": {
+#     "env": "production"
+#   }
+# }

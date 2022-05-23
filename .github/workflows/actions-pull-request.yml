@@ -1,0 +1,14 @@
+name: Pull request actions workflow
+
+on: 
+  pull_request:
+# This workflow runs when we create a pull-request only in 'main' branch
+    branches:
+      - main
+
+jobs:
+  run-github-actions:
+    runs-on: ubuntu-latest
+    steps:  
+      - name: Checkout Action
+        uses: actions/checkout@v1
