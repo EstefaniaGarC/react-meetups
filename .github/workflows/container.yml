@@ -1,6 +1,6 @@
 name: Docker Container
 
-on: pull_request
+on: push
 
 jobs:
   node-docker:
