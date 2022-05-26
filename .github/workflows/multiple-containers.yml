@@ -1,0 +1,20 @@
+name: Multiple Docker Containers
+
+on: push
+
+jobs:
+  node-docker:
+    # docker containers only run on ubuntu
+    runs-on: ubuntu-latest
+    # for multiple containers, instead the 'container' we will have the 'services' element with the same structure as the docker-composer file
+    services:
+      app:
+        # the build should point now to the app image maybe stored in docker hub
+        image: my-node-api-image
+        ports:
+          - 3001:3000
+      mongo:
+        image: mongo
+        ports:
+          - 27017:27017
+    

@@ -1,0 +1,28 @@
+name: Docker Container
+
+on: pull_request
+
+jobs:
+  node-docker:
+    runs-on: ubuntu-latest
+    # Docker runs on job level
+    # Docker container that is installed on the virtual machine and the steps will run on the container instead of directly on the virtual machine
+    # node docker image with linux alpine
+    container: 
+      image: node:16-alpine3.14
+    steps:
+      - name: Log node version
+        run: |
+          node -v 
+          cat /etc/os-release
+  docker-steps:
+    runs-on: ubuntu-latest
+    # use of Docker container in individual step
+    steps:
+      - name: step with docker
+        uses: docker://node:16-alpine3.14
+        with:
+          # Dockerfile ENTRYPOINT ['path to file', 'argument']
+          # in this case we want to execute 'echo' so we point to the path to the echo command
+          entrypoint: '/bin/echo'
+          args: 'Hello World'
